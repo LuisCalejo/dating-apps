@@ -5,15 +5,50 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
+# # sim 1
+# sim_name = "sim1"
+# num_sims = 1000
+# num_women = 500  #333
+# num_men = 500  #667
+# profiles_per_day_men = 100
+# profiles_per_day_women = 100
+# like_percentage_men = 0.25  # 0.46
+# like_percentage_women = 0.25  # 0.14
+# include_attractiveness = False
 
-num_sims = 20
-num_women = 333
-num_men = 667
-profiles_per_day_men = 200
+# # sim 2
+# sim_name = "sim2"
+# num_sims = 1000
+# num_women = 333  #333
+# num_men = 667  #667
+# profiles_per_day_men = 100
+# profiles_per_day_women = 100
+# like_percentage_men = 0.25  # 0.46
+# like_percentage_women = 0.25  # 0.14
+# include_attractiveness = False
+
+# # sim 3
+# sim_name = "sim3"
+# num_sims = 1000
+# num_women = 333  #333
+# num_men = 667  #667
+# profiles_per_day_men = 100
+# profiles_per_day_women = 100
+# like_percentage_men = 0.46  # 0.46
+# like_percentage_women = 0.14  # 0.14
+# include_attractiveness = False
+
+# sim 4
+sim_name = "sim4"
+num_sims = 1000
+num_women = 333  #333
+num_men = 667  #667
+profiles_per_day_men = 100
 profiles_per_day_women = 100
-like_percentage_men = 0.25  #  0.46
-like_percentage_women = 0.25  #  0.14
-include_attractiveness = False
+like_percentage_men = 0.46  # 0.46
+like_percentage_women = 0.14  # 0.14
+include_attractiveness = True
+
 
 class User:
     def __init__(self, id, gender, profiles_per_day, like_percentage, include_attractiveness):
@@ -46,7 +81,9 @@ class User:
 
     def get_like_prob(self, other_user):
         if user.include_attractiveness:
+            # # polynomial:
             like_prob = other_user.attractiveness ** (1/self.like_percentage-1)
+
         else:
             like_prob = self.like_percentage
         return like_prob
@@ -183,3 +220,4 @@ df['attractiveness'] = user_attractiveness_total
 df['likes'] = user_likes_total
 df['matches'] = user_matches_total
 df.to_csv('../results/user_data.csv')
+df.to_csv('../results/results_'+sim_name+'.csv')
